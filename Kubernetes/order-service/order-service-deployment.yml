@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orders-service
+  template:
+    metadata:
+      labels:
+        app: orders-service
+    spec:
+      containers:
+        - image: kapatsyndianadockerid/orderservice
+          name: orders-service
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8088
+              name: rest
+            - containerPort: 9094
+              name: grpc

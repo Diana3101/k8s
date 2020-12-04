@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-order
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-order
+  template:
+    metadata:
+      labels:
+        app: db-order
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_DB
+              value: orderbd
+            - name: POSTGRES_PASSWORD
+              value: "password"
+            - name: POSTGRES_USER
+              value: postgres
+          image: postgres
+          imagePullPolicy: IfNotPresent
+          name: db-order
+          ports:
+            - containerPort: 5432

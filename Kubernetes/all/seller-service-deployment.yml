@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sellers-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sellers-service
+  template:
+    metadata:
+      labels:
+        app: sellers-service
+    spec:
+      containers:
+        - image: kapatsyndianadockerid/sellerservic
+          name: sellers-service
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8089
+              name: rest
+            - containerPort: 9093
+              name: grpc

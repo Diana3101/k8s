@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-seller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-seller
+  template:
+    metadata:
+      labels:
+        app: db-seller
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_DB
+              value: sellerbd
+            - name: POSTGRES_PASSWORD
+              value: "password"
+            - name: POSTGRES_USER
+              value: postgres
+          image: postgres
+          imagePullPolicy: IfNotPresent
+          name: db-seller
+          ports:
+            - containerPort: 5432

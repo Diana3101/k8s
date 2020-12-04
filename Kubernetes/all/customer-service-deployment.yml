@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customers-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customers-service
+  template:
+    metadata:
+      labels:
+        app: customers-service
+    spec:
+      containers:
+        - image: kapatsyndianadockerid/customerservice
+          name: customers-service
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8086
+              name: rest
+            - containerPort: 9090
+              name: grpc

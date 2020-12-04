@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-service
+spec:
+  type: ClusterIP
+  ports:
+    - name: rest
+      port: 8088
+      targetPort: 8088
+    - name: grpc
+      port: 9094
+      targetPort: 9094
+  selector:
+    app: orders-service

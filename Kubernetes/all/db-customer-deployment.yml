@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-customer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-customer
+  template:
+    metadata:
+      labels:
+        app: db-customer
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_DB
+              value: customerbd
+            - name: POSTGRES_PASSWORD
+              value: "password"
+            - name: POSTGRES_USER
+              value: postgres
+          image: postgres
+          imagePullPolicy: IfNotPresent
+          name: db-customer
+          ports:
+            - containerPort: 5432
